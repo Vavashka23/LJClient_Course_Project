@@ -1,0 +1,9 @@
+bin\Debug\LJServerTest.exe
+bin\Debug\LJServerTest.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\LJServerTest.mainForm.resources
+obj\Debug\LJServerTest.Properties.Resources.resources
+obj\Debug\LJServerTest.csproj.GenerateResource.Cache
+obj\Debug\LJServerTest.exe
+obj\Debug\LJServerTest.pdb
+obj\Debug\LJServerTest.PageViewer.resources

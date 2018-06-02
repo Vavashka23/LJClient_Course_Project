@@ -1,0 +1,10 @@
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\bin\Debug\LJServerTest.exe
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\bin\Debug\LJServerTest.pdb
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\obj\Debug\LJServerTest.csprojAssemblyReference.cache
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\obj\Debug\LJServerTest.mainForm.resources
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\obj\Debug\LJServerTest.PageViewer.resources
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\obj\Debug\LJServerTest.Properties.Resources.resources
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\obj\Debug\LJServerTest.csproj.GenerateResource.cache
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\obj\Debug\LJServerTest.csproj.CoreCompileInputs.cache
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\obj\Debug\LJServerTest.exe
+C:\Users\Vavashka23\Downloads\LJServerTest\LJServerTest\obj\Debug\LJServerTest.pdb
