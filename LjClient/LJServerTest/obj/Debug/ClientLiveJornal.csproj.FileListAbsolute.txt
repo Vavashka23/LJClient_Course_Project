@@ -28,3 +28,13 @@ C:\Users\Vavashka23\Documents\GitHub\LJClient\LjClient\LJServerTest\obj\Debug\Cl
 C:\Users\Vavashka23\Documents\GitHub\LJClient\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.csproj.CoreCompileInputs.cache
 C:\Users\Vavashka23\Documents\GitHub\LJClient\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.exe
 C:\Users\Vavashka23\Documents\GitHub\LJClient\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.pdb
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\bin\Debug\ClientLiveJornal.exe
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\bin\Debug\ClientLiveJornal.pdb
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.csprojAssemblyReference.cache
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.mainForm.resources
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.PageViewer.resources
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.Properties.Resources.resources
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.csproj.GenerateResource.cache
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.csproj.CoreCompileInputs.cache
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.exe
+C:\Users\Vavashka23\Documents\GitHub\LJClient_Course_Project\LjClient\LJServerTest\obj\Debug\ClientLiveJornal.pdb

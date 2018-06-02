@@ -44,7 +44,7 @@ namespace ClientLiveJornal
 		}
         
 		//обычная загрузка страницы
-		private string GetPage (string url, CookieCollection cookies)
+		public string GetPage (string url)
 		{
             //создание запроса
 			HttpWebRequest request =
@@ -56,13 +56,7 @@ namespace ClientLiveJornal
 
 			request.Credentials = CredentialCache.DefaultCredentials;
 			request.Method = "GET";
-			request.CookieContainer = new CookieContainer ();
-
-			if (cookies != null)
-			{
-				request.CookieContainer.Add (cookies);
-			}
-
+			
 			// Заполняем параметры Proxy (_proxy == null, если прокси не используется)
 			request.Proxy = _proxy;
 
@@ -99,99 +93,7 @@ namespace ClientLiveJornal
 			return text.Substring (leftpos + left.Length,
 				rightpos - (leftpos + left.Length));
 		}
-        
-		// Загрузить страницу, для доступа к которой требуется авторизация
-		//Возвращает код HTML для запрашиваемой страницы
-		public string GetPrivatePage (string url, string login, string password)
-		{
-			CookieCollection cookies = GetBaseCookie (login, password);
 
-			string res = GetPage (url, cookies);
-			return res;
-		}
-        
-		// Получить базовые cookies для доступа к подзамочным записям
-		// Возвращает полученные cookies
-		private CookieCollection GetBaseCookie (string login, string password)
-		{
-			string lj_login_chal = GetChallenge ();
-
-			// Рассчитаем ответ как в методе авторизации challenge / response
-			string auth_response = GetAuthResponse (password, lj_login_chal);
-
-			// Строка запроса для отправки через форму
-			string textRequest = string.Format ("chal={0}&response={1}&user={2}",
-				HttpUtility.UrlEncode (lj_login_chal),
-				HttpUtility.UrlEncode (auth_response),
-				HttpUtility.UrlEncode (login));			 
-			 
-			// Выводим в лог посылаемый запрос
-			_log.WriteLine ("\r\n*** Request:");
-			_log.WriteLine (textRequest);
-
-			byte[] byteArray = Encoding.UTF8.GetBytes (textRequest);
-
-			// Получаем класс запроса
-			HttpWebRequest request =
-				(HttpWebRequest)WebRequest.Create ("http://www.livejournal.com/login.bml");
-
-			// Заполняем параметры запроса
-			request.Method = "POST";
-
-			// Запрещаем автоматический редирект, чтобы сохранить cookies, полученные на первой странице после запроса
-			request.AllowAutoRedirect = false;
-			request.ContentType = "application/x-www-form-urlencoded";
-			request.ContentLength = textRequest.Length;
-			//request.Referer = "http://www.livejournal.com/login.bml";
-			request.UserAgent = "LJServerTest";
-
-			// Очищаем коллекцию от старых cookie и добавляем туда новые
-			request.CookieContainer = new CookieContainer ();
-
-			// Заполняем параметры Proxy (_proxy == null, если прокси не используется)
-			request.Proxy = _proxy;
-
-			// Отправляем данные запроса
-			Stream requestStream = request.GetRequestStream ();
-			requestStream.Write (byteArray, 0, textRequest.Length);
-
-			// Получаем класс ответа
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
-
-			// Читаем ответ
-			Stream responseStream = response.GetResponseStream ();
-			StreamReader readStream = new StreamReader (responseStream, Encoding.UTF8);
-
-			string currResponse = readStream.ReadToEnd ();
-
-			// Выводим в лог ответ сервера
-			_log.WriteLine ("\r\n*** Response:");
-			_log.WriteLine (currResponse);
-
-			readStream.Close ();
-			response.Close ();
-
-			// Оставим только самые необходимые cookies
-			CookieCollection newCollection = new CookieCollection ();
-			for (int i = 0; i < response.Cookies.Count; i++)
-			{
-				if (response.Cookies[i].Name == "ljloggedin" ||
-					response.Cookies[i].Name == "ljmastersession")
-				{
-					newCollection.Add (response.Cookies[i]);
-				}
-			}
-
-			// Выведем в лог только полезные cookie
-			_log.WriteLine ("\r\n*** Cookies:");
-			for (int i = 0; i < newCollection.Count; i++)
-			{
-				_log.WriteLine (newCollection[i].ToString ());
-			}
-
-			return newCollection;
-		}
-        
 		//подсчёт md5
 		protected string ComputeMD5(string text)
 		{

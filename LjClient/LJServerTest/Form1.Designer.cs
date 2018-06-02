@@ -47,6 +47,7 @@ namespace ClientLiveJornal
             this.postComboBox = new System.Windows.Forms.ComboBox();
             this.postButton = new System.Windows.Forms.Button();
             this.clearButton2 = new System.Windows.Forms.Button();
+            this.clearButton3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -163,6 +164,7 @@ namespace ClientLiveJornal
             this.groupBox2.Controls.Add(this.urlText);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.openPageBtn);
+            this.groupBox2.Controls.Add(this.clearButton3);
             this.groupBox2.Location = new System.Drawing.Point(10, 302);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
@@ -180,7 +182,17 @@ namespace ClientLiveJornal
             this.openPageBtn.Text = "Загрузить страницу";
             this.openPageBtn.UseVisualStyleBackColor = true;
             this.openPageBtn.Click += new System.EventHandler(this.OpenPageBtn_Click);
-            
+
+            // clearButton3
+            this.clearButton3.Location = new System.Drawing.Point(380, 64);
+            this.clearButton3.Margin = new System.Windows.Forms.Padding(4);
+            this.clearButton3.Name = "clearButton3";
+            this.clearButton3.Size = new System.Drawing.Size(106, 28);
+            this.clearButton3.TabIndex = 10;
+            this.clearButton3.Text = "Очистить";
+            this.clearButton3.UseVisualStyleBackColor = true;
+            this.clearButton3.Click += new System.EventHandler(this.Clear_Click3);
+
             // urlText
             this.urlText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -204,7 +216,7 @@ namespace ClientLiveJornal
             this.clear.Margin = new System.Windows.Forms.Padding(4);
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(106, 28);
-            this.clear.TabIndex = 10;
+            this.clear.TabIndex = 11;
             this.clear.Text = "Очистить";
             this.clear.UseVisualStyleBackColor = true;
             this.clear.Click += new System.EventHandler(this.Clear_Click);
@@ -251,7 +263,7 @@ namespace ClientLiveJornal
             this.subjectText.Margin = new System.Windows.Forms.Padding(4);
             this.subjectText.Name = "subjectText";
             this.subjectText.Size = new System.Drawing.Size(468, 22);
-            this.subjectText.TabIndex = 11;
+            this.subjectText.TabIndex = 12;
 
             // tags label
             this.tegs.AutoSize = true;
@@ -268,7 +280,7 @@ namespace ClientLiveJornal
             this.tegsText.Margin = new System.Windows.Forms.Padding(4);
             this.tegsText.Name = "tagsText";
             this.tegsText.Size = new System.Drawing.Size(468, 22);
-            this.tegsText.TabIndex = 12;
+            this.tegsText.TabIndex = 13;
 
             // mainTextBox
             this.mainTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -280,7 +292,7 @@ namespace ClientLiveJornal
             this.mainTextBox.Name = "mainTextBox";
             this.mainTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.mainTextBox.Size = new System.Drawing.Size(550, 582);
-            this.mainTextBox.TabIndex = 13;
+            this.mainTextBox.TabIndex = 14;
 
             // postComboBox
             this.postComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -291,14 +303,14 @@ namespace ClientLiveJornal
             this.postComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.postComboBox.Name = "postComboBox";
             this.postComboBox.Size = new System.Drawing.Size(100, 24);
-            this.postComboBox.TabIndex = 14;
+            this.postComboBox.TabIndex = 15;
 
             // postButton
             this.postButton.Location = new System.Drawing.Point(710, 760);
             this.postButton.Margin = new System.Windows.Forms.Padding(4);
             this.postButton.Name = "postButton";
             this.postButton.Size = new System.Drawing.Size(106, 28);
-            this.postButton.TabIndex = 15;
+            this.postButton.TabIndex = 16;
             this.postButton.Text = "Запостить";
             this.postButton.UseVisualStyleBackColor = true;
             this.postButton.Click += new System.EventHandler(this.Post_Click);
@@ -308,7 +320,7 @@ namespace ClientLiveJornal
             this.clearButton2.Margin = new System.Windows.Forms.Padding(4);
             this.clearButton2.Name = "clearButton2";
             this.clearButton2.Size = new System.Drawing.Size(106, 28);
-            this.clearButton2.TabIndex = 15;
+            this.clearButton2.TabIndex = 17;
             this.clearButton2.Text = "Очистить";
             this.clearButton2.UseVisualStyleBackColor = true;
             this.clearButton2.Click += new System.EventHandler(this.Clear_Click2);
@@ -373,5 +385,6 @@ namespace ClientLiveJornal
         private System.Windows.Forms.ComboBox postComboBox;
         private System.Windows.Forms.Button postButton;
         private System.Windows.Forms.Button clearButton2;
+        private System.Windows.Forms.Button clearButton3;
     }
 }

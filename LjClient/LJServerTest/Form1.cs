@@ -72,8 +72,7 @@ namespace ClientLiveJornal
 
 		private void OpenPageBtn_Click (object sender, EventArgs e)
 		{
-			string page = GetServer ().GetPrivatePage (urlText.Text,
-				loginText.Text, passwordText.Text);
+			string page = GetServer ().GetPage (urlText.Text);
 
 			PageViewer dlg = new PageViewer (page);
 			dlg.ShowDialog ();
@@ -82,6 +81,13 @@ namespace ClientLiveJornal
         private void Clear_Click2(object sender, EventArgs e)
         {
             mainTextBox.Text = "";
+            subjectText.Text = "";
+            tegsText.Text = "";
+        }
+
+        private void Clear_Click3(object sender, EventArgs e)
+        {
+            urlText.Text = "";
         }
     }
 }
