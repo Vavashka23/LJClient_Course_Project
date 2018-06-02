@@ -3,7 +3,6 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Net;
 using System.IO;
-using System.Web;
 using System.Net.Sockets;
 
 namespace ClientLiveJornal
@@ -163,14 +162,19 @@ namespace ClientLiveJornal
                     socket.Close();
 
                     return Encoding.UTF8.GetString(bytesReceived);
-                }
-                
+                } else
+                {
+                    socket.Shutdown(SocketShutdown.Both);
+                    socket.Close();
+                    _log.Write("Connection Failed!");
+                    return "exit with error";
+                }                
             }
             catch (Exception ex)
             {
                 _log.WriteLine("\r\n Exception: " + ex);
             }
-            return "exit";
+            return "exit with error";
         }
 
     }

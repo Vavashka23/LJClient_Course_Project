@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Specialized;
-using System.Media;
 using System.Web;
 
 namespace ClientLiveJornal
