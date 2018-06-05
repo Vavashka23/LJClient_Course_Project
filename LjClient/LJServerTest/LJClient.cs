@@ -15,24 +15,22 @@ namespace ClientLiveJornal
 		public abstract void LoginClear (string login, string password);
 		public abstract void LoginClearMD5 (string login, string password);
 		public abstract void LoginChallenge (string login, string password);
+        public abstract void LoginCookies(string login, string password);
 
 		public abstract void PostEventChallenge (string text, string subj, string tag,
 			string user, string password);
 
-		ILog _log;
-
-        //т.к. прокси не используется
-		WebProxy _proxy = null;
+		public ILog _log;
 
 		public LJClient (ILog log)
 		{
 			_log = log;
 		}
 
-		protected CookieCollection _cookies = new CookieCollection();
-        
-		// Адрес сервера 
-		public abstract string ServerUrl
+        public CookieCollection _cookies = new CookieCollection();
+
+        // Адрес сервера 
+        public abstract string ServerUrl
 		{
 			get;
 		}
@@ -55,9 +53,6 @@ namespace ClientLiveJornal
 
 			request.Credentials = CredentialCache.DefaultCredentials;
 			request.Method = "GET";
-			
-			// Заполняем параметры Proxy (_proxy == null, если прокси не используется)
-			request.Proxy = _proxy;
 
 			// Получаем класс ответа
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
@@ -72,25 +67,6 @@ namespace ClientLiveJornal
 			response.Close ();
 
 			return currResponse;
-		}
-        
-		// Получить строку, находящуюся между двумя другими
-		private string ExctractBetween (string text, string left, string right)
-		{
-			int leftpos = text.IndexOf (left);
-			if (leftpos == -1)
-			{
-				return "";
-			}
-
-			int rightpos = text.IndexOf (right, leftpos + left.Length);
-			if (rightpos == -1)
-			{
-				return "";
-			}
-
-			return text.Substring (leftpos + left.Length,
-				rightpos - (leftpos + left.Length));
 		}
 
 		//подсчёт md5

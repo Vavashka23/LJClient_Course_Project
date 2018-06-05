@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 
 namespace ClientLiveJornal
 {
@@ -283,7 +284,46 @@ namespace ClientLiveJornal
 			return ExctractValue (challengeResponse, left, right);
 		}
 
-		public override void LoginClearMD5 (string user, string password)
+        public override void LoginCookies(string username, string password)
+        {
+            string ljsession = SessionGenerate(username, password);
+
+            Cookie cookie = new Cookie("ljsession", ljsession, "/", "livejournal.com");
+
+            _cookies = new CookieCollection();
+            _cookies.Add(cookie);
+
+            //string request = string.Format ("mode=login&auth_method=cookie&user={0}", login);
+
+            string request = string.Format(@"<?xml version='1.0'?>
+<methodCall>
+<methodName>LJ.XMLRPC.login</methodName>
+<params>
+<param>
+
+<value><struct>
+<member><name>username</name>
+<value><string>{0}</string></value>
+</member>
+
+<member><name>auth_method</name>
+<value><string>cookie</string></value>
+</member>
+
+<member><name>ver</name>
+<value><int>1</int></value>
+</member>
+
+</struct></value>
+</param>
+</params>
+</methodCall>",
+                username);
+
+            SendRequest(request);
+        }
+
+        public override void LoginClearMD5 (string user, string password)
 		{
 			string request = string.Format (@"<?xml version='1.0'?>
 <methodCall>

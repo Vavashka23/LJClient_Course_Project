@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Specialized;
+using System.Net;
 using System.Web;
 
 namespace ClientLiveJornal
@@ -109,7 +110,21 @@ namespace ClientLiveJornal
 			return dict["ljsession"];
 		}
 
-		public override void LoginClearMD5 (string user, string password)
+        public override void LoginCookies(string login, string password)
+        {
+            string ljsession = SessionGenerate(login, password);
+
+            Cookie cookie = new Cookie("ljsession", ljsession, "/", "livejournal.com");
+
+            _cookies = new CookieCollection();
+            _cookies.Add(cookie);
+
+            string request = string.Format("mode=login&auth_method=cookie&user={0}", login);
+
+            SendRequest(request);
+        }
+
+        public override void LoginClearMD5 (string user, string password)
 		{
 			string request = string.Format ("mode=login&auth_method=clear&user={0}&hpassword={1}",
 				user, ComputeMD5 (password) );
