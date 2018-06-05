@@ -73,12 +73,12 @@ namespace ClientLiveJornal
 		protected string ComputeMD5(string text)
 		{
 			MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider ();
-			byte[] hashBytes = md5.ComputeHash( Encoding.UTF8.GetBytes( text ) );
+			byte[] hashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(text));
 
 			StringBuilder sb = new StringBuilder();
 
 			foreach( byte hashByte in hashBytes )
-				sb.Append( Convert.ToString( hashByte, 16 ).PadLeft( 2, '0' ) );
+				sb.Append(Convert.ToString(hashByte, 16).PadLeft(2, '0'));
 
 			return sb.ToString();
 		}
