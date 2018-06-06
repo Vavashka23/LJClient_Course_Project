@@ -43,31 +43,58 @@ namespace ClientLiveJornal
 		//обычная загрузка страницы
 		public string GetPage (string url)
 		{
-            //создание запроса
-			HttpWebRequest request =
-				(HttpWebRequest)WebRequest.Create (url);
+            try
+            {
+                //задание порта и хоста для соединения
+                int port = 80;
+                Uri uri = new Uri(url);
+                string host_name = uri.Host;
+                string path = uri.PathAndQuery;
+                
+                //инициализация параметров для сокета
+                IPHostEntry ipHost = Dns.GetHostEntry(host_name);
+                IPAddress address = ipHost.AddressList[0];
+                IPEndPoint ipEndPoint = new IPEndPoint(address, port);
 
-			//заполнение параметров запроса
-			//разрешение автоматических редиректов
-			request.AllowAutoRedirect = true;
+                //создание сокета
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect(ipEndPoint);
+                if (socket.Connected)
+                {
+                    var header =
+                        "GET " + path + " HTTP/1.1\r\n" +
+                        "Host: " + host_name + "\r\n" +
+                        "User-Agent: LJClientApplication" + "\r\n" +
+                        "Connection: close" + "\r\n" + "\r\n";
 
-			request.Credentials = CredentialCache.DefaultCredentials;
-			request.Method = "GET";
+                    //вывод в лог посылаемого запроса
+                    _log.Write("\r\n$$$ Request:\r\n" + header);
+                    byte[] bytesToSend = Encoding.UTF8.GetBytes(header);
+                    var byteCount = socket.Send(bytesToSend, SocketFlags.None);
 
-			// Получаем класс ответа
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse ();
+                    byte[] bytesReceived = new byte[10000000];
+                    byteCount = socket.Receive(bytesReceived, SocketFlags.None);
+                    _log.WriteLine("\n$$$ Response:\n" + Encoding.UTF8.GetString(bytesReceived));
 
-			// Читаем ответ
-			Stream responseStream = response.GetResponseStream ();
-			StreamReader readStream = new StreamReader (responseStream, Encoding.UTF8);
+                    socket.Shutdown(SocketShutdown.Both);
+                    socket.Close();
 
-			string currResponse = readStream.ReadToEnd ();
-
-			readStream.Close ();
-			response.Close ();
-
-			return currResponse;
-		}
+                    return Encoding.UTF8.GetString(bytesReceived);
+                }
+                else
+                {
+                    socket.Shutdown(SocketShutdown.Both);
+                    socket.Close();
+                    _log.Write("Connection Failed!");
+                    return "exit with error";
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.WriteLine("\r\n Exception: " + ex);
+            }
+            return "exit with error";
+        }
 
 		//подсчёт md5
 		protected string ComputeMD5(string text)

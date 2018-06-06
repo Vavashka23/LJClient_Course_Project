@@ -5,8 +5,8 @@ namespace ClientLiveJornal
 {
     public partial class mainForm : Form
 	{
-		LJClientFlat _flatServer;
-		LJClientXml _xmlServer;
+		LJClientFlat _flatClient;
+		LJClientXml _xmlClient;
 
 		ILog outputLog;
         ILog inputLog;
@@ -27,17 +27,17 @@ namespace ClientLiveJornal
             inputLog = new TextLog(mainTextBox);
             outputLog = new TextLog (logText);
 
-			_flatServer = new LJClientFlat (outputLog);
-			_xmlServer = new LJClientXml (outputLog);
+			_flatClient = new LJClientFlat (outputLog);
+			_xmlClient = new LJClientXml (outputLog);
 		}
 
         private LJClient GetServer()
         {
             LJClient currentServer;
             if (protocol.SelectedIndex == 0)
-                currentServer = _flatServer;
+                currentServer = _flatClient;
             else
-                currentServer = _xmlServer;
+                currentServer = _xmlClient;
             return currentServer;
         }
 
