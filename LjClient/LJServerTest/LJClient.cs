@@ -2,7 +2,6 @@ using System;
 using System.Text;
 using System.Security.Cryptography;
 using System.Net;
-using System.IO;
 using System.Net.Sockets;
 
 namespace ClientLiveJornal
@@ -18,7 +17,7 @@ namespace ClientLiveJornal
         public abstract void LoginCookies(string login, string password);
 
 		public abstract void PostEventChallenge (string text, string subj, string tag,
-			string user, string password);
+			string user, string password, string security);
 
 		public ILog _log;
 

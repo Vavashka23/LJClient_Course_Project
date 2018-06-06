@@ -105,7 +105,7 @@ namespace ClientLiveJornal
 
 			string challengeResponse = SendRequest (request);
 
-			// Получим значение challenge. 
+			// Получим значение challenge
 			// Между этими строками находится интересующее нас значение
 			string left = "<name>challenge</name><value><string>";
 			string right = "</string></value>";
@@ -132,7 +132,7 @@ namespace ClientLiveJornal
 		}
 
 		public override void PostEventChallenge (string text, string subj, string tag,
-			string user, string password)
+			string user, string password, string security)
 		{
 			string challenge = GetChallenge ();
 
@@ -173,28 +173,32 @@ namespace ClientLiveJornal
 <value><string>{4}</string></value>
 </member>
 
+<member><name>security</name>
+<value><string>{5}</string></value>
+</member>
+
 <member><name>allowmask</name>
 <value><string>0</string></value>
 </member>
 
 <member><name>year</name>
-<value><string>{5}</string></value>
-</member>
-
-<member><name>mon</name>
 <value><string>{6}</string></value>
 </member>
 
-<member><name>day</name>
+<member><name>mon</name>
 <value><string>{7}</string></value>
 </member>
 
-<member><name>hour</name>
+<member><name>day</name>
 <value><string>{8}</string></value>
 </member>
 
-<member><name>min</name>
+<member><name>hour</name>
 <value><string>{9}</string></value>
+</member>
+
+<member><name>min</name>
+<value><string>{10}</string></value>
 </member>
 
 <member><name>ver</name>
@@ -202,11 +206,11 @@ namespace ClientLiveJornal
 </member>
 
 <member><name>lineendings</name>
-<value><string>{10}</string></value>
+<value><string>{11}</string></value>
 </member>
 
 <member><name>prop_current_music</name>
-<value><string>{11}</string></value>
+<value><string>{12}</string></value>
 </member>
 
 <member><name>ver</name>
@@ -223,6 +227,7 @@ namespace ClientLiveJornal
 				user,
 				text,
 				subj,
+                security,
 				date.Year, date.Month, date.Day,
 				date.Hour, date.Minute,
 				"\r\n",
@@ -276,7 +281,7 @@ namespace ClientLiveJornal
 
 			string challengeResponse = SendRequest (request);
 
-			// Получим значение challenge. 
+			// Получим значение challenge
 			// Между этими строками находится интересующее нас значение
 			string left = "<name>ljsession</name><value><string>";
 			string right = "</string></value>";
@@ -292,8 +297,6 @@ namespace ClientLiveJornal
 
             _cookies = new CookieCollection();
             _cookies.Add(cookie);
-
-            //string request = string.Format ("mode=login&auth_method=cookie&user={0}", login);
 
             string request = string.Format(@"<?xml version='1.0'?>
 <methodCall>

@@ -69,7 +69,7 @@ namespace ClientLiveJornal
 		}
 
 		public override void PostEventChallenge (string text, string subj, string tag, 
-			string user, string password)
+			string user, string password, string security)
 		{
 			string challenge = GetChallenge ();
 
@@ -79,12 +79,13 @@ namespace ClientLiveJornal
 
             DateTime date = DateTime.Now;
 
-			string request = string.Format ("mode=postevent&auth_method=challenge&auth_challenge={0}&auth_response={1}&user={2}&event={3}&subject={4}&allowmask=0&year={5}&mon={6}&day={7}&hour={8}&min={9}&ver=1",
+			string request = string.Format ("mode=postevent&auth_method=challenge&auth_challenge={0}&auth_response={1}&user={2}&event={3}&subject={4}&security={5}&allowmask=0&year={6}&mon={7}&day={8}&hour={9}&min={10}&ver=1",
 				challenge, 
 				auth_response, 
 				user, 
 				newText,
-                HttpUtility.UrlEncode(subj), 
+                HttpUtility.UrlEncode(subj),
+                security,
 				date.Year, date.Month, date.Day, 
 				date.Hour, date.Minute);
 

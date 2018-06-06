@@ -48,6 +48,7 @@ namespace ClientLiveJornal
             this.postButton = new System.Windows.Forms.Button();
             this.clearButton2 = new System.Windows.Forms.Button();
             this.clearButton3 = new System.Windows.Forms.Button();
+            this.loginCookies = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -120,6 +121,7 @@ namespace ClientLiveJornal
             this.groupBox1.Controls.Add(this.loginChallenge);
             this.groupBox1.Controls.Add(this.loginClearMD5);
             this.groupBox1.Controls.Add(this.loginClear);
+            this.groupBox1.Controls.Add(this.loginCookies);
             this.groupBox1.Location = new System.Drawing.Point(10, 172);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
@@ -142,7 +144,7 @@ namespace ClientLiveJornal
             this.loginClearMD5.Location = new System.Drawing.Point(8, 59);
             this.loginClearMD5.Margin = new System.Windows.Forms.Padding(4);
             this.loginClearMD5.Name = "loginClearMD5";
-            this.loginClearMD5.Size = new System.Drawing.Size(219, 28);
+            this.loginClearMD5.Size = new System.Drawing.Size(250, 28);
             this.loginClearMD5.TabIndex = 6;
             this.loginClearMD5.Text = "Авторизация (Clear MD5)";
             this.loginClearMD5.UseVisualStyleBackColor = true;
@@ -157,7 +159,17 @@ namespace ClientLiveJornal
             this.loginClear.Text = "Авторизация (Clear)";
             this.loginClear.UseVisualStyleBackColor = true;
             this.loginClear.Click += new System.EventHandler(this.LoginClear_Click);
-            
+
+            // loginCookies
+            this.loginCookies.Location = new System.Drawing.Point(266, 59);
+            this.loginCookies.Margin = new System.Windows.Forms.Padding(4);
+            this.loginCookies.Name = "loginCookies";
+            this.loginCookies.Size = new System.Drawing.Size(220, 28);
+            this.loginCookies.TabIndex = 4;
+            this.loginCookies.Text = "Авторизация (Cookies)";
+            this.loginCookies.UseVisualStyleBackColor = true;
+            this.loginCookies.Click += new System.EventHandler(this.LoginCookies_Click);
+
             // groupBox2
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -386,5 +398,6 @@ namespace ClientLiveJornal
         private System.Windows.Forms.Button postButton;
         private System.Windows.Forms.Button clearButton2;
         private System.Windows.Forms.Button clearButton3;
+        private System.Windows.Forms.Button loginCookies;
     }
 }

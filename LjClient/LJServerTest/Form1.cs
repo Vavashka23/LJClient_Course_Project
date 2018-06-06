@@ -53,11 +53,37 @@ namespace ClientLiveJornal
 
         private void Post_Click(object sender, EventArgs e)
         {
-            GetServer().PostEventChallenge(mainTextBox.Text,
+            int k = postComboBox.SelectedIndex;
+            switch (k)
+            {
+                case 0:
+                    GetServer().PostEventChallenge(mainTextBox.Text,
                     subjectText.Text,
                     tegsText.Text,
                     loginText.Text,
-                    passwordText.Text);
+                    passwordText.Text,
+                    postComboBox.Text);
+                    return;
+                case 1:
+                    GetServer().PostEventChallenge(mainTextBox.Text,
+                    subjectText.Text,
+                    tegsText.Text,
+                    loginText.Text,
+                    passwordText.Text,
+                    postComboBox.Text);
+                    return;
+                case 2:
+                    GetServer().PostEventChallenge(mainTextBox.Text,
+                    subjectText.Text,
+                    tegsText.Text,
+                    loginText.Text,
+                    passwordText.Text,
+                    postComboBox.Text);
+                    return;
+                default:
+                    logText.Text = "Something wrong)";
+                    return;
+            }
         }
 
         private void LoginClearMD5_Click (object sender, EventArgs e)
@@ -88,6 +114,11 @@ namespace ClientLiveJornal
         private void Clear_Click3(object sender, EventArgs e)
         {
             urlText.Text = "";
+        }
+
+        private void LoginCookies_Click(object sender, EventArgs e)
+        {
+            GetServer().LoginCookies(loginText.Text, passwordText.Text);
         }
     }
 }
