@@ -137,20 +137,37 @@ namespace ClientLiveJornal
                 IPHostEntry ipHost = Dns.GetHostEntry(host_name);
                 IPAddress address = ipHost.AddressList[0];
                 IPEndPoint ipEndPoint = new IPEndPoint(address, port);
-
+                
                 //создание сокета
                 Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 socket.Connect(ipEndPoint);
                 if (socket.Connected)
                 {
-                    var header =
-                        "POST " + this.ServerUrl + " HTTP/1.1\r\n" +
-                        "Host: " + host_name + "\r\n" +
-                        "Content-type: " + this.ContentType + "\r\n" +
-                        "Content-length: " + byteArray.Length + "\r\n" +
-                        "\r\n" +
-                        textRequest + "\r\n";
-
+                    var header = "";
+                    // Если есть cookie с именем "ljsession", то для авторизации с ее помощью
+                    // необходимо добавить заголовок с именем "X-LJ-Auth" и значением "cookie"
+                    if (_cookies["ljsession"] != null)
+                    {
+                        header =
+                            "POST " + this.ServerUrl + " HTTP/1.1\r\n" +
+                            "Host: " + host_name + "\r\n" +
+                            "Content-type: " + this.ContentType + "\r\n" +
+                            "Content-length: " + byteArray.Length + "\r\n" +
+                            "X-LJ-Auth: cookie" + "\r\n" +
+                            "Cookie: " + _cookies.ToString() +
+                            "\r\n" +
+                            textRequest + "\r\n";
+                    }
+                    else
+                    {
+                        header =
+                            "POST " + this.ServerUrl + " HTTP/1.1\r\n" +
+                            "Host: " + host_name + "\r\n" +
+                            "Content-type: " + this.ContentType + "\r\n" +
+                            "Content-length: " + byteArray.Length + "\r\n" +
+                            "\r\n" +
+                            textRequest + "\r\n";
+                    }
                     //вывод в лог посылаемого запроса
                     _log.Write("\r\n$$$ Request:\r\n" + header);
                     byte[] bytesToSend = Encoding.UTF8.GetBytes(header);
