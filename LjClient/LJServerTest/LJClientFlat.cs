@@ -17,7 +17,7 @@ namespace ClientLiveJornal
 				user,
                 password);
 
-			this.SendRequest (request);
+			this.SendRequest (request, null);
 		}
         
 		// Сделать словарь из полученных в ходе запроса значений
@@ -51,13 +51,13 @@ namespace ClientLiveJornal
 
 			string request = string.Format ("mode=login&auth_method=challenge&auth_challenge={0}&auth_response={1}&user={2}", challenge, auth_response, username);
 
-			SendRequest (request);
+			SendRequest (request, null);
 		}
 
 		public override string GetChallenge ()
 		{
 			string request = "mode=getchallenge";
-			string challengeResponse = SendRequest (request);
+			string challengeResponse = SendRequest (request, null);
 
 			StringDictionary dict = MakeDict (challengeResponse);
 			if (dict["success"] == "OK")
@@ -89,7 +89,7 @@ namespace ClientLiveJornal
 				date.Year, date.Month, date.Day, 
 				date.Hour, date.Minute);
 
-			SendRequest (request);
+			SendRequest (request, null);
 		}
 
 		public override string SessionGenerate (string login, string password)
@@ -100,29 +100,32 @@ namespace ClientLiveJornal
 
 			string request = string.Format ("mode=sessiongenerate&auth_method=challenge&auth_challenge={0}&auth_response={1}&user={2}&expiration=long", challenge, auth_response, login);
 
-			string challengeResponse = SendRequest (request);
+			string challengeResponse = SendRequest (request, null);
 
-			StringDictionary dict = MakeDict (challengeResponse);
+           /* StringDictionary dict = MakeDict (challengeResponse);
 			if (dict["success"] != "OK")
 			{
 				return "";
 			}
 
-			return dict["ljsession"];
+			return dict["ljsession"];*/
+            return challengeResponse;
 		}
 
         public override void LoginCookies(string login, string password)
         {
             string ljsession = SessionGenerate(login, password);
 
-            Cookie cookie = new Cookie("ljsession", ljsession, "/", "livejournal.com");
+            /*Cookie cookie = new Cookie("ljsession", ljsession, "/", "livejournal.com");
 
             _cookies = new CookieCollection();
-            _cookies.Add(cookie);
+            _cookies.Add(cookie);*/
+
+            string cookie = "ljsession=" + ljsession+ "/" + "livejournal.com";
 
             string request = string.Format("mode=login&auth_method=cookie&user={0}", login);
 
-            SendRequest(request);
+            SendRequest(request, cookie);
         }
 
         public override void LoginClearMD5 (string user, string password)
@@ -130,7 +133,7 @@ namespace ClientLiveJornal
 			string request = string.Format ("mode=login&auth_method=clear&user={0}&hpassword={1}",
 				user, ComputeMD5 (password) );
 
-			this.SendRequest (request);
+			this.SendRequest (request, null);
 		}
 	}
 }

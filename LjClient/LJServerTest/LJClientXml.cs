@@ -37,7 +37,7 @@ namespace ClientLiveJornal
 </methodCall>",
 				user, password);
 
-			string response = this.SendRequest (request);
+			string response = this.SendRequest (request, null);
 		}
 
 		public override string ServerUrl
@@ -91,7 +91,7 @@ namespace ClientLiveJornal
 
 </methodCall>", username, challenge, auth_response);
 
-			SendRequest (request);
+			SendRequest (request, null);
 		}
 
 		public override string GetChallenge ()
@@ -103,7 +103,7 @@ namespace ClientLiveJornal
 </params>
 </methodCall>";
 
-			string challengeResponse = SendRequest (request);
+			string challengeResponse = SendRequest (request, null);
 
 			// ѕолучим значение challenge
 			// ћежду этими строками находитс€ интересующее нас значение
@@ -233,7 +233,7 @@ namespace ClientLiveJornal
 				"\r\n",
 				"XmlLJServer");
 
-			SendRequest (request);
+			SendRequest (request, null);
 		}
         
 		public override string SessionGenerate (string user, string password)
@@ -279,7 +279,7 @@ namespace ClientLiveJornal
 </methodCall>",
 				challenge, auth_response, user);
 
-			string challengeResponse = SendRequest (request);
+			string challengeResponse = SendRequest (request, null);
 
 			// ѕолучим значение challenge
 			// ћежду этими строками находитс€ интересующее нас значение
@@ -293,10 +293,12 @@ namespace ClientLiveJornal
         {
             string ljsession = SessionGenerate(username, password);
 
-            Cookie cookie = new Cookie("ljsession", ljsession, "/", "livejournal.com");
+            /*Cookie cookie = new Cookie("ljsession", ljsession, "/", "livejournal.com");
 
             _cookies = new CookieCollection();
-            _cookies.Add(cookie);
+            _cookies.Add(cookie);*/
+
+            string cookie = "ljsession=" + ljsession;
 
             string request = string.Format(@"<?xml version='1.0'?>
 <methodCall>
@@ -323,7 +325,7 @@ namespace ClientLiveJornal
 </methodCall>",
                 username);
 
-            SendRequest(request);
+            SendRequest(request, cookie);
         }
 
         public override void LoginClearMD5 (string user, string password)
@@ -353,7 +355,7 @@ namespace ClientLiveJornal
 </methodCall>",
 				user, ComputeMD5 (password));
 
-			string response = this.SendRequest (request);
+			string response = this.SendRequest (request, null);
 
 		}
 	}

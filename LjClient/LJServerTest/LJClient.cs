@@ -122,7 +122,7 @@ namespace ClientLiveJornal
 		}
 
         //отправка запроса на сервер ЖЖ
-		protected string SendRequest (string textRequest)
+		protected string SendRequest (string textRequest, string cookie)
 		{
             try
             {
@@ -146,7 +146,7 @@ namespace ClientLiveJornal
                     var header = "";
                     // Если есть cookie с именем "ljsession", то для авторизации с ее помощью
                     // необходимо добавить заголовок с именем "X-LJ-Auth" и значением "cookie"
-                    if (_cookies["ljsession"] != null)
+                    if (cookie != null)
                     {
                         header =
                             "POST " + this.ServerUrl + " HTTP/1.1\r\n" +
@@ -154,7 +154,7 @@ namespace ClientLiveJornal
                             "Content-type: " + this.ContentType + "\r\n" +
                             "Content-length: " + byteArray.Length + "\r\n" +
                             "X-LJ-Auth: cookie" + "\r\n" +
-                            "Cookie: " + _cookies.ToString() +
+                            "Cookie: " + cookie + "\r\n" +
                             "\r\n" +
                             textRequest + "\r\n";
                     }

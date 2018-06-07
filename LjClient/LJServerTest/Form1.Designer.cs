@@ -167,6 +167,8 @@ namespace ClientLiveJornal
             this.loginCookies.Size = new System.Drawing.Size(220, 28);
             this.loginCookies.TabIndex = 4;
             this.loginCookies.Text = "Авторизация (Cookies)";
+            this.loginCookies.Visible = false;
+            this.loginCookies.ForeColor = System.Drawing.Color.Red;
             this.loginCookies.UseVisualStyleBackColor = true;
             this.loginCookies.Click += new System.EventHandler(this.LoginCookies_Click);
 
